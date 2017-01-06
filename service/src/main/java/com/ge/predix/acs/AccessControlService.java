@@ -26,8 +26,8 @@ import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
-
 import com.ge.predix.acs.request.context.AcsRequestEnrichingFilter;
+import com.ge.predix.acs.request.audit.LoggingFilter;
 import com.google.common.base.Predicate;
 
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -49,6 +49,9 @@ public class AccessControlService {
 
     @Autowired
     private AcsRequestEnrichingFilter acsRequestEnrichingFilter;
+
+    @Autowired
+    private LoggingFilter loggingFilter;
 
     private String serviceId;
 
@@ -74,6 +77,15 @@ public class AccessControlService {
         filterRegistrationBean.setEnabled(false);
         filterRegistrationBean.setFilter(this.acsRequestEnrichingFilter);
         return filterRegistrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean loggingRegistrationBean() {
+        FilterRegistrationBean loggingRegistrationBean = new FilterRegistrationBean();
+        loggingRegistrationBean.setEnabled(true);
+        loggingRegistrationBean.setFilter(this.loggingFilter);
+        loggingRegistrationBean.setOrder(1);
+        return loggingRegistrationBean;
     }
 
     @Bean

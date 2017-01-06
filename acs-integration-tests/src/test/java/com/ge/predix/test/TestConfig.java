@@ -20,7 +20,7 @@ public final class TestConfig {
     @BeforeSuite
     public static synchronized void setup() {
         if (!acsStarted) {
-            AccessControlService.main(new String[] {});
+//            AccessControlService.main(new String[] {});
             acsStarted = true;
         }
     }
