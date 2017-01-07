@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+//
+//import com.ge.predix.audit.AuditClient;
+//import com.ge.predix.audit.AuditCredentials;
 
 @Component
 public class LoggingFilter extends OncePerRequestFilter {
